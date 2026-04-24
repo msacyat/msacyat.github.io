@@ -1,0 +1,502 @@
+## Hi there 👋
+
+<[megan_sacyat_bubble_portfolio.html](https://github.com/user-attachments/files/27061178/megan_sacyat_bubble_portfolio.html)
+!--
+**msacyat/msacyat** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+
+Here are some ideas to get you started:
+
+- 🔭 I’m currently working on ...
+- 🌱 I’m currently learning ...
+- 👯 I’m looking to collaborate on ...
+- 🤔 I’m looking for help with ...
+- 💬 Ask me about ...
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap');
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  #portfolio-root {
+    width: 100%;
+    height: 580px;
+    position: relative;
+    overflow: hidden;
+    background: #0a0a0f;
+    font-family: 'DM Sans', sans-serif;
+    cursor: none;
+  }
+
+  #cursor {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.6);
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    transition: width 0.15s, height 0.15s, background 0.15s;
+    z-index: 100;
+  }
+
+  canvas {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+  }
+
+  .bubble-label {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    pointer-events: none;
+    transition: opacity 0.3s;
+  }
+
+  .bubble-label .icon {
+    font-size: 22px;
+    display: block;
+    margin-bottom: 2px;
+  }
+
+  .bubble-label .name {
+    font-size: 11px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.9);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  #overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 50;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.4s;
+  }
+
+  #overlay.visible {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  #overlay-bg {
+    position: absolute;
+    inset: 0;
+    background: rgba(10,10,15,0.75);
+    backdrop-filter: blur(12px);
+  }
+
+  #overlay-card {
+    position: relative;
+    z-index: 2;
+    background: rgba(255,255,255,0.06);
+    border: 0.5px solid rgba(255,255,255,0.15);
+    border-radius: 20px;
+    padding: 36px 40px;
+    max-width: 480px;
+    width: 90%;
+    color: white;
+  }
+
+  #overlay-card .card-icon {
+    font-size: 36px;
+    margin-bottom: 12px;
+    display: block;
+  }
+
+  #overlay-card .card-tag {
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+    margin-bottom: 8px;
+  }
+
+  #overlay-card h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 26px;
+    font-weight: 400;
+    margin-bottom: 6px;
+    color: white;
+  }
+
+  #overlay-card .card-org {
+    font-size: 13px;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 16px;
+  }
+
+  #overlay-card p {
+    font-size: 14px;
+    line-height: 1.7;
+    color: rgba(255,255,255,0.75);
+    margin-bottom: 20px;
+  }
+
+  #overlay-card .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 24px;
+  }
+
+  #overlay-card .tag {
+    font-size: 11px;
+    padding: 4px 10px;
+    border-radius: 20px;
+    background: rgba(255,255,255,0.08);
+    color: rgba(255,255,255,0.6);
+    border: 0.5px solid rgba(255,255,255,0.12);
+  }
+
+  #close-btn {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.08);
+    border: 0.5px solid rgba(255,255,255,0.15);
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #header {
+    position: absolute;
+    top: 24px;
+    left: 28px;
+    z-index: 10;
+    pointer-events: none;
+  }
+
+  #header h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 18px;
+    font-weight: 400;
+    color: rgba(255,255,255,0.9);
+    font-style: italic;
+  }
+
+  #header p {
+    font-size: 11px;
+    color: rgba(255,255,255,0.3);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-top: 2px;
+  }
+
+  #hint {
+    position: absolute;
+    bottom: 20px;
+    left: 0; right: 0;
+    text-align: center;
+    font-size: 11px;
+    color: rgba(255,255,255,0.2);
+    letter-spacing: 0.06em;
+    pointer-events: none;
+    z-index: 10;
+  }
+</style>
+
+<div id="portfolio-root">
+  <div id="cursor"></div>
+  <canvas id="c"></canvas>
+  <div id="header">
+    <h1>Megan Sacyat</h1>
+    <p>Portfolio</p>
+  </div>
+  <div id="hint">hover to explore · click to open</div>
+
+  <div id="overlay">
+    <div id="overlay-bg"></div>
+    <div id="overlay-card">
+      <button id="close-btn">✕</button>
+      <span class="card-icon" id="c-icon"></span>
+      <div class="card-tag" id="c-tag"></div>
+      <h2 id="c-title"></h2>
+      <div class="card-org" id="c-org"></div>
+      <p id="c-desc"></p>
+      <div class="tags" id="c-tags"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+const projects = [
+  {
+    icon: "🏢",
+    name: "Property Ops",
+    tag: "Operations",
+    title: "Property Management at Scale",
+    org: "W.J. Britton & Co. · 2025–Present",
+    desc: "Built and implemented a compliance tracking system across 70+ residential properties, reducing insurance gaps by 50%. Streamlined 100+ work orders monthly using Asana and coordinated safety inspections city-wide.",
+    skills: ["Asana", "Compliance", "Logistics", "Client Relations"],
+    color: [120, 180, 255],
+    radius: 64
+  },
+  {
+    icon: "📣",
+    name: "Brand Design",
+    tag: "Marketing",
+    title: "Wine Brand Marketing",
+    org: "Scheid Family Wines · 2022–2023",
+    desc: "Designed 20+ POS materials for in-store activations at Trader Joe's, ALDI, Total Wine & More, and Sprouts. Managed 100+ digital brand assets across WordPress and SharePoint.",
+    skills: ["Illustrator", "InDesign", "Photoshop", "WordPress"],
+    color: [255, 160, 120],
+    radius: 58
+  },
+  {
+    icon: "🎭",
+    name: "PCN Media",
+    tag: "Creative Direction",
+    title: "Media Director, PCN 49",
+    org: "Pilipinx Cultural Night · 2024–2025",
+    desc: "Directed 130+ person photoshoots, designed a 40-page playbill, and drove a social campaign that hit 149.2k views and 8.2k interactions — significantly boosting ticket sales.",
+    skills: ["Canva", "Photography", "Instagram", "Event Production"],
+    color: [200, 140, 255],
+    radius: 62
+  },
+  {
+    icon: "💻",
+    name: "Berkeley IT",
+    tag: "Communications",
+    title: "IT Communications Assistant",
+    org: "UC Berkeley IT · 2024–2025",
+    desc: "Wrote 5+ feature articles and relayed 100+ events and updates to UC Berkeley IT staff and the broader UC Tech community via Slack and LinkedIn.",
+    skills: ["Slack", "LinkedIn", "Writing", "Photography"],
+    color: [100, 220, 180],
+    radius: 52
+  },
+  {
+    icon: "📚",
+    name: "PASS Advocacy",
+    tag: "Leadership",
+    title: "Advocacy Coordinator",
+    org: "Pilipinx Academic Student Services · 2024–Present",
+    desc: "Planned student events on a $3,000 semesterly budget, collaborated with 3+ organizations, and organized a community library system of 100+ books.",
+    skills: ["Event Planning", "Budgeting", "Community Building"],
+    color: [255, 210, 80],
+    radius: 50
+  },
+  {
+    icon: "🎓",
+    name: "UC Berkeley",
+    tag: "Education",
+    title: "B.A. Media Studies",
+    org: "University of California, Berkeley · 2022–2025",
+    desc: "Graduated with a 3.62 GPA, double-focusing on Media Studies and Creative Writing. Participated in the European Innovation Academy startup bootcamp in Porto, finishing in the Top 10 teams.",
+    skills: ["GPA 3.62", "Creative Writing", "Entrepreneurship"],
+    color: [255, 120, 150],
+    radius: 55
+  },
+  {
+    icon: "🚀",
+    name: "EIA Startup",
+    tag: "Innovation",
+    title: "Top 10 Team — EIA Bootcamp",
+    org: "European Innovation Academy · Porto, 2024",
+    desc: "Represented UC Berkeley at an international startup bootcamp in Portugal. Developed and pitched a product concept, placing in the top 10 teams globally.",
+    skills: ["Startup Strategy", "Pitching", "International"],
+    color: [80, 200, 255],
+    radius: 46
+  }
+];
+
+const canvas = document.getElementById('c');
+const ctx = canvas.getContext('2d');
+const root = document.getElementById('portfolio-root');
+const cursorEl = document.getElementById('cursor');
+const overlay = document.getElementById('overlay');
+
+let W, H, mouse = {x: -999, y: -999}, hoveredIdx = -1, animId;
+
+function resize() {
+  W = canvas.width = root.offsetWidth;
+  H = canvas.height = root.offsetHeight;
+}
+resize();
+window.addEventListener('resize', () => { resize(); initBubbles(); });
+
+const bubbles = [];
+
+function initBubbles() {
+  bubbles.length = 0;
+  const margin = 80;
+  projects.forEach((p, i) => {
+    const angle = (i / projects.length) * Math.PI * 2 - Math.PI / 2;
+    const dist = Math.min(W, H) * 0.28;
+    const cx = W / 2 + Math.cos(angle) * dist;
+    const cy = H / 2 + Math.sin(angle) * dist;
+    bubbles.push({
+      x: cx, y: cy,
+      vx: (Math.random() - 0.5) * 0.4,
+      vy: (Math.random() - 0.5) * 0.4,
+      targetX: cx, targetY: cy,
+      r: p.radius,
+      data: p,
+      scale: 1,
+      alpha: 1
+    });
+  });
+}
+initBubbles();
+
+function drawBubble(b, i) {
+  const isHovered = i === hoveredIdx;
+  const sc = isHovered ? 1.18 : 1;
+  b.scale += (sc - b.scale) * 0.1;
+  const r = b.r * b.scale;
+  const [cr, cg, cb] = b.data.color;
+
+  ctx.save();
+  ctx.beginPath();
+  ctx.arc(b.x, b.y, r, 0, Math.PI * 2);
+
+  const grd = ctx.createRadialGradient(b.x - r*0.25, b.y - r*0.25, r*0.1, b.x, b.y, r);
+  grd.addColorStop(0, `rgba(${cr},${cg},${cb},${isHovered ? 0.55 : 0.3})`);
+  grd.addColorStop(0.6, `rgba(${cr},${cg},${cb},${isHovered ? 0.2 : 0.12})`);
+  grd.addColorStop(1, `rgba(${cr},${cg},${cb},0.05)`);
+  ctx.fillStyle = grd;
+  ctx.fill();
+
+  ctx.strokeStyle = `rgba(${cr},${cg},${cb},${isHovered ? 0.7 : 0.35})`;
+  ctx.lineWidth = isHovered ? 1.5 : 0.75;
+  ctx.stroke();
+
+  if (isHovered) {
+    ctx.shadowColor = `rgba(${cr},${cg},${cb},0.5)`;
+    ctx.shadowBlur = 28;
+    ctx.stroke();
+    ctx.shadowBlur = 0;
+  }
+
+  const shine = ctx.createRadialGradient(b.x - r*0.3, b.y - r*0.35, 0, b.x - r*0.3, b.y - r*0.35, r*0.55);
+  shine.addColorStop(0, 'rgba(255,255,255,0.18)');
+  shine.addColorStop(1, 'rgba(255,255,255,0)');
+  ctx.beginPath();
+  ctx.arc(b.x, b.y, r, 0, Math.PI * 2);
+  ctx.fillStyle = shine;
+  ctx.fill();
+  ctx.restore();
+
+  const iconSize = isHovered ? 24 : 20;
+  const nameSize = isHovered ? 12 : 10;
+  ctx.font = `${iconSize}px serif`;
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillText(b.data.icon, b.x, b.y - 10);
+  ctx.font = `${nameSize}px 'DM Sans', sans-serif`;
+  ctx.fillStyle = `rgba(255,255,255,${isHovered ? 0.95 : 0.7})`;
+  ctx.fillText(b.data.name, b.x, b.y + 14);
+}
+
+function collide() {
+  for (let i = 0; i < bubbles.length; i++) {
+    for (let j = i+1; j < bubbles.length; j++) {
+      const a = bubbles[i], b = bubbles[j];
+      const dx = b.x - a.x, dy = b.y - a.y;
+      const dist = Math.sqrt(dx*dx + dy*dy);
+      const minDist = a.r + b.r + 10;
+      if (dist < minDist && dist > 0.01) {
+        const nx = dx/dist, ny = dy/dist;
+        const overlap = (minDist - dist) * 0.3;
+        a.x -= nx * overlap; a.y -= ny * overlap;
+        b.x += nx * overlap; b.y += ny * overlap;
+      }
+    }
+  }
+}
+
+function loop() {
+  ctx.clearRect(0, 0, W, H);
+
+  let newHovered = -1;
+  bubbles.forEach((b, i) => {
+    const dx = mouse.x - b.x, dy = mouse.y - b.y;
+    const dist = Math.sqrt(dx*dx + dy*dy);
+    const repel = 120;
+
+    if (dist < repel && dist > 1) {
+      const force = (repel - dist) / repel;
+      b.vx -= (dx/dist) * force * 1.8;
+      b.vy -= (dy/dist) * force * 1.8;
+    }
+
+    if (dist < b.r * 1.3) newHovered = i;
+
+    b.vx += (b.targetX - b.x) * 0.012;
+    b.vy += (b.targetY - b.y) * 0.012;
+    b.vx *= 0.88; b.vy *= 0.88;
+    b.x += b.vx; b.y += b.vy;
+
+    const pad = b.r + 10;
+    if (b.x < pad) { b.x = pad; b.vx *= -0.5; }
+    if (b.x > W - pad) { b.x = W - pad; b.vx *= -0.5; }
+    if (b.y < pad) { b.y = pad; b.vy *= -0.5; }
+    if (b.y > H - pad) { b.y = H - pad; b.vy *= -0.5; }
+  });
+
+  collide();
+  hoveredIdx = newHovered;
+
+  bubbles.forEach((b, i) => drawBubble(b, i));
+
+  cursorEl.style.width = hoveredIdx >= 0 ? '6px' : '10px';
+  cursorEl.style.height = hoveredIdx >= 0 ? '6px' : '10px';
+  root.style.cursor = hoveredIdx >= 0 ? 'pointer' : 'none';
+
+  animId = requestAnimationFrame(loop);
+}
+loop();
+
+root.addEventListener('mousemove', e => {
+  const rect = root.getBoundingClientRect();
+  mouse.x = e.clientX - rect.left;
+  mouse.y = e.clientY - rect.top;
+  cursorEl.style.left = mouse.x + 'px';
+  cursorEl.style.top = mouse.y + 'px';
+});
+
+root.addEventListener('mouseleave', () => {
+  mouse.x = -999; mouse.y = -999;
+  cursorEl.style.opacity = '0';
+});
+root.addEventListener('mouseenter', () => { cursorEl.style.opacity = '1'; });
+
+root.addEventListener('click', e => {
+  if (hoveredIdx < 0) return;
+  const d = bubbles[hoveredIdx].data;
+  document.getElementById('c-icon').textContent = d.icon;
+  document.getElementById('c-tag').textContent = d.tag;
+  document.getElementById('c-title').textContent = d.title;
+  document.getElementById('c-org').textContent = d.org;
+  document.getElementById('c-desc').textContent = d.desc;
+  const tagsEl = document.getElementById('c-tags');
+  tagsEl.innerHTML = d.skills.map(s => `<span class="tag">${s}</span>`).join('');
+  overlay.classList.add('visible');
+});
+
+document.getElementById('close-btn').addEventListener('click', () => overlay.classList.remove('visible'));
+document.getElementById('overlay-bg').addEventListener('click', () => overlay.classList.remove('visible'));
+
+root.addEventListener('touchmove', e => {
+  e.preventDefault();
+  const rect = root.getBoundingClientRect();
+  mouse.x = e.touches[0].clientX - rect.left;
+  mouse.y = e.touches[0].clientY - rect.top;
+}, {passive: false});
+</script>
+
+- 📫 How to reach me: ...
+- 😄 Pronouns: ...
+- ⚡ Fun fact: ...
+-->
