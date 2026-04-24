@@ -102,7 +102,7 @@ function Bubble({
           <img
             src={`${import.meta.env.BASE_URL}${item.logo}`}
             alt={item.title}
-            className="h-[58%] w-[58%] rounded-full object-cover shadow-[0_8px_18px_rgba(15,23,42,0.22)]"
+            className="h-[74%] w-[74%] object-contain drop-shadow-[0_8px_18px_rgba(15,23,42,0.22)]"
           />
         ) : (
           <span className="px-2 text-center text-sm font-bold tracking-[-0.03em] text-white drop-shadow-md">
