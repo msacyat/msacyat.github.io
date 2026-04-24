@@ -99,11 +99,13 @@ function Bubble({
 
       <div className="relative flex h-full w-full items-center justify-center overflow-hidden rounded-full">
         {item.logo ? (
-          <img
-            src={`${import.meta.env.BASE_URL}${item.logo}`}
-            alt={item.title}
-            className="h-[74%] w-[74%] object-contain drop-shadow-[0_8px_18px_rgba(15,23,42,0.22)]"
-          />
+          <span className="flex h-[74%] w-[74%] items-center justify-center overflow-hidden rounded-full bg-white/10 shadow-[0_8px_18px_rgba(15,23,42,0.22)]">
+            <img
+              src={`${import.meta.env.BASE_URL}${item.logo}`}
+              alt={item.title}
+              className="h-full w-full object-cover"
+            />
+          </span>
         ) : (
           <span className="px-2 text-center text-sm font-bold tracking-[-0.03em] text-white drop-shadow-md">
             {item.shortTitle}
