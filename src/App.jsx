@@ -5,7 +5,7 @@ const defaultProject = projects[2];
 const restMouse = { x: -9999, y: -9999 };
 const profileNode = {
   id: "about",
-  size: 176,
+  size: 198,
   x: 50,
   y: 48,
 };
