@@ -103,7 +103,7 @@ function Bubble({
             <img
               src={`${import.meta.env.BASE_URL}${item.logo}`}
               alt={item.title}
-              className="h-full w-full object-cover"
+              className="h-full w-full rounded-full object-cover"
             />
           </span>
         ) : (
