@@ -34,7 +34,7 @@ export const projects = [
     logo: "logo-spark-social.jpg",
     x: 34,
     y: 37,
-    size: 98,
+    size: 118,
   },
   {
     id: "summit-weekend",
@@ -50,7 +50,7 @@ export const projects = [
     logo: "logo-summit-weekend.jpg",
     x: 50,
     y: 27,
-    size: 84,
+    size: 102,
   },
   {
     id: "editorial-kit",
@@ -66,7 +66,7 @@ export const projects = [
     logo: "logo-editorial-kit.jpg",
     x: 66,
     y: 37,
-    size: 90,
+    size: 110,
   },
   {
     id: "ops-dashboard",
@@ -82,7 +82,7 @@ export const projects = [
     logo: "logo-ops-dashboard.jpg",
     x: 27,
     y: 25,
-    size: 82,
+    size: 100,
   },
   {
     id: "feature-story",
@@ -98,7 +98,7 @@ export const projects = [
     logo: "logo-feature-story.jpg",
     x: 73,
     y: 25,
-    size: 84,
+    size: 102,
   },
   {
     id: "community-reach",
@@ -114,7 +114,7 @@ export const projects = [
     logo: "logo-community-reach.jpg",
     x: 22,
     y: 50,
-    size: 78,
+    size: 94,
   },
   {
     id: "retail-toolkit",
@@ -130,7 +130,7 @@ export const projects = [
     logo: "logo-retail-toolkit.jpg",
     x: 78,
     y: 50,
-    size: 88,
+    size: 106,
   },
   {
     id: "playbill-system",
@@ -146,7 +146,7 @@ export const projects = [
     logo: "logo-playbill-system.jpg",
     x: 34,
     y: 68,
-    size: 82,
+    size: 100,
   },
   {
     id: "newsletter-studio",
@@ -162,6 +162,6 @@ export const projects = [
     logo: "logo-newsletter-studio.jpg",
     x: 66,
     y: 68,
-    size: 76,
+    size: 92,
   },
 ];
