@@ -167,110 +167,112 @@ function ProjectModal({ item, onClose }) {
   return (
     <div className="fixed inset-0 z-[100] bg-slate-950/76 backdrop-blur-xl">
       <div className="absolute inset-0" onClick={onClose} aria-hidden="true" />
-      <aside className="relative z-10 h-full w-full overflow-y-auto animate-[modal-in_280ms_ease-out]">
-        <div className="min-h-full px-4 py-4 sm:px-6 sm:py-6 lg:px-8 lg:py-8">
-          <div className="mx-auto flex min-h-[calc(100svh-2rem)] w-full max-w-[1420px] items-center">
-            <div className="relative w-full rounded-[2.2rem] border border-white/14 bg-[linear-gradient(135deg,rgba(255,255,255,0.14),rgba(255,255,255,0.06))] p-5 shadow-[0_40px_120px_rgba(8,15,30,0.48)] backdrop-blur-2xl sm:p-6 lg:p-8">
-              <button
-                type="button"
-                onClick={onClose}
-                className="absolute right-4 top-4 z-10 h-10 w-10 rounded-full border border-white/15 bg-slate-950/35 text-base text-white/80 transition hover:bg-slate-950/55"
-                aria-label="Close project details"
-              >
-                ×
-              </button>
+      <aside className="relative z-10 flex h-screen w-full items-start justify-center animate-[modal-in_280ms_ease-out] overflow-hidden">
+        <div className="w-full px-2 pb-3 pt-1 sm:px-5 sm:pb-5 sm:pt-2 lg:px-6 lg:pb-4 lg:pt-2">
+          <div className="mx-auto flex w-full max-w-[1040px] items-start justify-center">
+            <div className="ml-[-12.5%] w-[125%] origin-center scale-[0.8] sm:ml-0 sm:w-full sm:scale-[0.96] lg:scale-[0.92]">
+              <div className="relative w-full max-h-[calc(100svh-2rem)] overflow-hidden rounded-[2.2rem] border border-white/14 bg-[linear-gradient(135deg,rgba(255,255,255,0.14),rgba(255,255,255,0.06))] p-4 shadow-[0_40px_120px_rgba(8,15,30,0.48)] backdrop-blur-2xl sm:p-5 lg:p-5">
+                <button
+                  type="button"
+                  onClick={onClose}
+                  className="absolute right-4 top-4 z-10 h-10 w-10 rounded-full border border-white/15 bg-slate-950/35 text-base text-white/80 transition hover:bg-slate-950/55"
+                  aria-label="Close project details"
+                >
+                  {"\u00D7"}
+                </button>
 
-              <div className="grid gap-6 xl:grid-cols-[1.55fr_0.95fr] xl:items-start">
-                <div className="rounded-[1.7rem] border border-white/15 bg-white/8 p-3 shadow-glow backdrop-blur-xl sm:p-4">
-                  <div className="relative overflow-hidden rounded-[1.35rem]">
-                    <img
-                      src={`${import.meta.env.BASE_URL}${gallery[slideIndex]}`}
-                      alt={`${item.title} slide ${slideIndex + 1}`}
-                      className="aspect-[16/10] w-full object-cover"
-                    />
-                    <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(5,10,20,0.06),rgba(5,10,20,0.3))]" />
-                    <div className="absolute left-4 top-4 rounded-full border border-white/15 bg-slate-950/45 px-3 py-1.5 text-[0.62rem] font-semibold uppercase tracking-[0.24em] text-white/78 backdrop-blur-md">
-                      {item.eyebrow || item.category}
+                <div className="mx-auto max-w-[760px] lg:max-w-[720px]">
+                  <div className="rounded-[1.7rem] border border-white/15 bg-white/8 p-3 shadow-glow backdrop-blur-xl">
+                    <div className="relative overflow-hidden rounded-[1.35rem]">
+                      <img
+                        src={`${import.meta.env.BASE_URL}${gallery[slideIndex]}`}
+                        alt={`${item.title} slide ${slideIndex + 1}`}
+                        className="aspect-[16/9] max-h-[26svh] w-full object-cover sm:max-h-[34svh] lg:max-h-[30svh]"
+                      />
+                      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(5,10,20,0.06),rgba(5,10,20,0.3))]" />
+                      <div className="absolute left-4 top-4 rounded-full border border-white/15 bg-slate-950/45 px-3 py-1.5 text-[0.62rem] font-semibold uppercase tracking-[0.24em] text-white/78 backdrop-blur-md">
+                        {item.eyebrow || item.category}
+                      </div>
+
+                      {gallery.length > 1 ? (
+                        <>
+                          <button
+                            type="button"
+                            onClick={() =>
+                              setSlideIndex((current) =>
+                                current === 0 ? gallery.length - 1 : current - 1,
+                              )
+                            }
+                            className="absolute left-4 top-1/2 h-11 w-11 -translate-y-1/2 rounded-full border border-white/15 bg-slate-950/45 text-2xl text-white/80 backdrop-blur-md transition hover:bg-slate-950/60"
+                            aria-label="Previous slide"
+                          >
+                            &#8249;
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() =>
+                              setSlideIndex((current) =>
+                                current === gallery.length - 1 ? 0 : current + 1,
+                              )
+                            }
+                            className="absolute right-4 top-1/2 h-11 w-11 -translate-y-1/2 rounded-full border border-white/15 bg-slate-950/45 text-2xl text-white/80 backdrop-blur-md transition hover:bg-slate-950/60"
+                            aria-label="Next slide"
+                          >
+                            &#8250;
+                          </button>
+                        </>
+                      ) : null}
                     </div>
 
                     {gallery.length > 1 ? (
-                      <>
-                        <button
-                          type="button"
-                          onClick={() =>
-                            setSlideIndex((current) =>
-                              current === 0 ? gallery.length - 1 : current - 1,
-                            )
-                          }
-                          className="absolute left-4 top-1/2 h-11 w-11 -translate-y-1/2 rounded-full border border-white/15 bg-slate-950/45 text-2xl text-white/80 backdrop-blur-md transition hover:bg-slate-950/60"
-                          aria-label="Previous slide"
-                        >
-                          &#8249;
-                        </button>
-                        <button
-                          type="button"
-                          onClick={() =>
-                            setSlideIndex((current) =>
-                              current === gallery.length - 1 ? 0 : current + 1,
-                            )
-                          }
-                          className="absolute right-4 top-1/2 h-11 w-11 -translate-y-1/2 rounded-full border border-white/15 bg-slate-950/45 text-2xl text-white/80 backdrop-blur-md transition hover:bg-slate-950/60"
-                          aria-label="Next slide"
-                        >
-                          &#8250;
-                        </button>
-                      </>
+                      <div className="mt-3 flex justify-center gap-2">
+                        {gallery.map((slide, index) => (
+                          <button
+                            key={slide}
+                            type="button"
+                            onClick={() => setSlideIndex(index)}
+                            className={classNames(
+                              "h-2.5 rounded-full transition",
+                              index === slideIndex ? "w-9 bg-white" : "w-2.5 bg-white/35",
+                            )}
+                            aria-label={`Go to slide ${index + 1}`}
+                          />
+                        ))}
+                      </div>
                     ) : null}
                   </div>
 
-                  {gallery.length > 1 ? (
-                    <div className="mt-3 flex justify-center gap-2">
-                      {gallery.map((slide, index) => (
-                        <button
-                          key={slide}
-                          type="button"
-                          onClick={() => setSlideIndex(index)}
-                          className={classNames(
-                            "h-2.5 rounded-full transition",
-                            index === slideIndex ? "w-9 bg-white" : "w-2.5 bg-white/35",
-                          )}
-                          aria-label={`Go to slide ${index + 1}`}
-                        />
-                      ))}
+                  <div className="mt-3 space-y-2.5 rounded-[1.7rem] border border-white/12 bg-slate-950/18 p-4 backdrop-blur-xl sm:mt-4 sm:p-4.5">
+                    <div>
+                      <p className="text-xs font-semibold uppercase tracking-[0.3em] text-white/55">
+                        {item.eyebrow || item.category}
+                      </p>
+                      <h2 className="mt-1.5 pr-10 text-[1.4rem] font-black tracking-[-0.05em] text-white sm:text-[1.8rem]">
+                        {item.title}
+                      </h2>
                     </div>
-                  ) : null}
-                </div>
 
-                <div className="space-y-4 lg:space-y-5">
-                  <div>
-                    <p className="text-xs font-semibold uppercase tracking-[0.3em] text-white/55">
-                      {item.eyebrow || item.category}
+                  <div className="grid gap-3 text-sm text-white/82 sm:grid-cols-2">
+                      <div className="rounded-[1.35rem] border border-white/10 bg-slate-950/20 p-3.5 sm:p-4">
+                        <p className="text-[0.65rem] font-bold uppercase tracking-[0.25em] text-white/45">
+                          Role
+                        </p>
+                        <p className="mt-2 text-base font-medium text-white">{item.role}</p>
+                      </div>
+                      <div className="rounded-[1.35rem] border border-white/10 bg-slate-950/20 p-3.5 sm:p-4">
+                        <p className="text-[0.65rem] font-bold uppercase tracking-[0.25em] text-white/45">
+                          Tools
+                        </p>
+                        <p className="mt-2 text-base font-medium text-white">
+                          {item.tools.join(" / ")}
+                        </p>
+                      </div>
+                    </div>
+
+                    <p className="max-w-xl text-sm leading-5 text-white/84 sm:text-[0.88rem]">
+                      {item.description}
                     </p>
-                    <h2 className="mt-2 pr-10 text-3xl font-black tracking-[-0.05em] text-white sm:text-[2.7rem]">
-                      {item.title}
-                    </h2>
                   </div>
-
-                  <div className="grid gap-3 text-sm text-white/82 sm:grid-cols-2 xl:grid-cols-1">
-                    <div className="rounded-[1.35rem] border border-white/10 bg-slate-950/20 p-4">
-                      <p className="text-[0.65rem] font-bold uppercase tracking-[0.25em] text-white/45">
-                        Role
-                      </p>
-                      <p className="mt-2 text-base font-medium text-white">{item.role}</p>
-                    </div>
-                    <div className="rounded-[1.35rem] border border-white/10 bg-slate-950/20 p-4">
-                      <p className="text-[0.65rem] font-bold uppercase tracking-[0.25em] text-white/45">
-                        Tools
-                      </p>
-                      <p className="mt-2 text-base font-medium text-white">
-                        {item.tools.join(" / ")}
-                      </p>
-                    </div>
-                  </div>
-
-                  <p className="max-w-xl text-sm leading-7 text-white/84 sm:text-[1rem]">
-                    {item.description}
-                  </p>
                 </div>
               </div>
             </div>
@@ -521,29 +523,30 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-hero-grid text-mist">
-      <div className="mx-auto max-w-[1500px] px-4 py-4 sm:px-6 sm:py-6 lg:px-8">
+      <div className="mx-auto max-w-[1500px] px-3 py-3 sm:px-5 sm:py-4 lg:px-8">
         <section className="overflow-hidden rounded-[2.4rem] border border-white/12 bg-white/[0.03] shadow-glow">
-          <div className="min-h-[calc(100svh-2rem)] px-4 py-4 sm:px-6 lg:px-8 lg:py-5">
+          <div className="min-h-[calc(100svh-1.5rem)] px-4 py-3 sm:px-5 sm:py-4 lg:px-7 lg:py-4">
+            <div className="origin-top scale-[1.25] pb-20 pt-2">
             <div className="mx-auto flex max-w-4xl flex-col items-center text-center">
-              <h1 className="text-4xl font-black tracking-[-0.06em] text-white sm:text-[2.85rem]">
+              <h1 className="text-[2.35rem] font-black tracking-[-0.06em] text-white sm:text-[2.7rem]">
                 Megan Sacyat
               </h1>
-              <p className="mt-2 text-sm font-semibold uppercase tracking-[0.3em] text-white/62 sm:text-base">
+              <p className="mt-1.5 text-xs font-semibold uppercase tracking-[0.3em] text-white/62 sm:text-sm">
                 Marketing • Events • Operations
               </p>
-              <p className="mt-2 text-sm text-white/72 sm:text-base">
+              <p className="mt-1.5 text-sm text-white/72 sm:text-[0.95rem]">
                 Interactive portfolio — click a project to explore
               </p>
             </div>
 
-            <div className="mt-4 flex flex-wrap justify-center gap-2">
+            <div className="mt-3 flex flex-wrap justify-center gap-2">
               {categories.map((category) => (
                 <button
                   key={category}
                   type="button"
                   onClick={() => setSelectedCategory(category)}
                   className={classNames(
-                    "rounded-full border px-4 py-2 text-sm font-semibold transition",
+                    "rounded-full border px-4 py-1.5 text-sm font-semibold transition",
                     selectedCategory === category
                       ? "border-white/40 bg-white/18 text-white"
                       : "border-white/12 bg-white/6 text-white/72 hover:bg-white/12",
@@ -556,7 +559,7 @@ export default function App() {
 
             <div
               ref={fieldRef}
-              className="relative mt-4 min-h-[520px] overflow-hidden rounded-[2.1rem] border border-white/10 bg-slate-950/15 sm:min-h-[560px] lg:min-h-[62svh]"
+              className="relative mt-3 min-h-[460px] overflow-hidden rounded-[2.1rem] border border-white/10 bg-slate-950/15 sm:min-h-[500px] lg:min-h-[54svh]"
               onPointerMove={handlePointerMove}
               onPointerLeave={handlePointerLeave}
             >
@@ -607,6 +610,7 @@ export default function App() {
                 <span>Hover for title</span>
                 <span>Click for details</span>
               </div>
+            </div>
             </div>
           </div>
         </section>
