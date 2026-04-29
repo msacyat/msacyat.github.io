@@ -146,7 +146,7 @@ export const projects = [
     tools: ["Programming", "Partnerships", "Budget Management", "Community Outreach"],
     description:
       "August 2024 - May 2025. Planned culturally responsive programming and coordinated advocacy-centered student support for Pilipinx students at UC Berkeley.",
-    gallery: ["pass-photo-1.jpg", "pass-photo-2.jpg", "pass-photo-3.jpg"],
+    gallery: ["pass-photo-1-cropped.jpg", "pass-photo-2.jpg", "pass-photo-3.jpg"],
     mediaTitles: [
       "PASS rally moment",
       "PASS workshop and event graphics",
