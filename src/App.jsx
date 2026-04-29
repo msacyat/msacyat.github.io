@@ -326,10 +326,10 @@ function ProjectModal({ item, onClose }) {
                       )}
                     >
                       {activeEmbedUrl ? (
-                        <div
-                          className={classNames(
-                            "w-full overflow-hidden",
-                            activeFrameType === "portrait" ? "aspect-[4/5]" : "aspect-[16/9]",
+                          <div
+                            className={classNames(
+                              "w-full overflow-hidden",
+                              activeFrameType === "portrait" ? "aspect-[4/5]" : "aspect-[16/9]",
                           )}
                         >
                           <iframe
@@ -341,11 +341,11 @@ function ProjectModal({ item, onClose }) {
                             allowFullScreen
                           />
                         </div>
-                      ) : activeMediaLink ? (
-                        <button
-                          type="button"
-                          onClick={handleImageAction}
-                          className={classNames(
+                        ) : activeMediaLink && !gallery[slideIndex] ? (
+                          <button
+                            type="button"
+                            onClick={handleImageAction}
+                            className={classNames(
                             "flex w-full flex-col items-start justify-end bg-[linear-gradient(135deg,rgba(35,52,84,0.95),rgba(59,83,127,0.92))] p-6 text-left transition duration-300 hover:bg-[linear-gradient(135deg,rgba(43,63,101,0.98),rgba(73,101,152,0.95))]",
                             activeFrameType === "portrait" ? "aspect-[4/5]" : "aspect-[16/9]",
                           )}
@@ -361,10 +361,10 @@ function ProjectModal({ item, onClose }) {
                             Open article in new tab
                           </span>
                         </button>
-                      ) : (
-                        <div
-                          className={classNames(
-                            "block w-full overflow-hidden transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]",
+                        ) : (
+                          <div
+                            className={classNames(
+                              "block w-full overflow-hidden transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]",
                             imageExpanded
                               ? "max-h-[70svh] sm:max-h-[78svh] lg:max-h-[72svh]"
                               : activeFrameType === "portrait"
@@ -483,14 +483,36 @@ function ProjectModal({ item, onClose }) {
                       </a>
                     ) : null}
 
-                    <div className="rounded-[1.35rem] border border-white/10 bg-slate-950/20 p-3.5 sm:p-4">
-                      <p className="text-[0.65rem] font-bold uppercase tracking-[0.25em] text-white/45">
-                        Tools
-                      </p>
-                      <p className="mt-2 text-base font-medium leading-7 text-white">
-                        {item.tools.join(" / ")}
-                      </p>
-                    </div>
+                      {item.id === "about" ? (
+                        <div className="rounded-[1.35rem] border border-white/10 bg-slate-950/20 p-3.5 sm:p-4">
+                          <p className="text-[0.65rem] font-bold uppercase tracking-[0.25em] text-white/45">
+                            {item.contactTitle || "Let's Keep in Touch:"}
+                          </p>
+                          <div className="mt-3 flex flex-wrap gap-3">
+                            {(item.contactLinks || []).map((link) => (
+                              <a
+                                key={link.label}
+                                href={link.href}
+                                target={link.href.startsWith("http") ? "_blank" : undefined}
+                                rel={link.href.startsWith("http") ? "noreferrer" : undefined}
+                                className="inline-flex items-center rounded-full border border-white/14 bg-white/8 px-4 py-2 text-sm font-semibold text-white/88 transition hover:bg-white/14"
+                              >
+                                {link.label}
+                                {link.value ? `: ${link.value}` : ""}
+                              </a>
+                            ))}
+                          </div>
+                        </div>
+                      ) : (
+                        <div className="rounded-[1.35rem] border border-white/10 bg-slate-950/20 p-3.5 sm:p-4">
+                          <p className="text-[0.65rem] font-bold uppercase tracking-[0.25em] text-white/45">
+                            Tools
+                          </p>
+                          <p className="mt-2 text-base font-medium leading-7 text-white">
+                            {item.tools.join(" / ")}
+                          </p>
+                        </div>
+                      )}
                   </div>
                 </div>
               </div>
