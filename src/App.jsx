@@ -361,37 +361,41 @@ function ProjectModal({ item, onClose }) {
                             Open article in new tab
                           </span>
                         </button>
-                        ) : (
-                          <div
-                            className={classNames(
-                              "block w-full overflow-hidden transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]",
-                            imageExpanded
-                              ? "max-h-[70svh] sm:max-h-[78svh] lg:max-h-[72svh]"
-                              : activeFrameType === "portrait"
-                                ? "max-h-[54svh] sm:max-h-[62svh] lg:max-h-[58svh]"
-                                : "max-h-[26svh] sm:max-h-[34svh] lg:max-h-[30svh]",
-                          )}
-                        >
-                          <button
-                            type="button"
-                            onClick={handleImageAction}
-                            className="block w-full"
-                            aria-label={`Expand ${item.title} slide ${slideIndex + 1}`}
-                          >
-                            <img
-                              src={`${import.meta.env.BASE_URL}${gallery[slideIndex]}`}
-                              alt={`${item.title} slide ${slideIndex + 1}`}
+                          ) : (
+                            <div
                               className={classNames(
-                                "w-full transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]",
-                                activeFrameType === "portrait"
-                                  ? "h-auto object-contain"
-                                  : "h-auto object-cover",
-                                imageExpanded ? "scale-100" : "scale-100 group-hover:scale-[1.03]",
-                              )}
-                            />
-                          </button>
-                        </div>
-                      )}
+                                "block w-full overflow-hidden rounded-[1.2rem] bg-slate-950/12 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]",
+                              imageExpanded
+                                ? "max-h-[70svh] sm:max-h-[78svh] lg:max-h-[72svh]"
+                                : "h-[26svh] sm:h-[34svh] lg:h-[30svh]",
+                            )}
+                          >
+                            <button
+                              type="button"
+                              onClick={handleImageAction}
+                              className="block h-full w-full"
+                              aria-label={`Expand ${item.title} slide ${slideIndex + 1}`}
+                            >
+                              <span
+                                className={classNames(
+                                  "flex h-full w-full items-center justify-center overflow-hidden",
+                                  imageExpanded ? "px-0 py-0" : "px-0 py-0",
+                                )}
+                              >
+                                <img
+                                  src={`${import.meta.env.BASE_URL}${gallery[slideIndex]}`}
+                                  alt={`${item.title} slide ${slideIndex + 1}`}
+                                  className={classNames(
+                                    "transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]",
+                                    imageExpanded
+                                      ? "h-auto max-h-[70svh] w-full object-contain object-center"
+                                      : "h-full w-full object-cover object-center group-hover:scale-[1.03]",
+                                  )}
+                                />
+                              </span>
+                            </button>
+                          </div>
+                        )}
                       <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(5,10,20,0.06),rgba(5,10,20,0.3))]" />
                       <div className="absolute left-4 top-4 rounded-full border border-white/15 bg-slate-950/45 px-3 py-1.5 text-[0.62rem] font-semibold uppercase tracking-[0.24em] text-white/78 backdrop-blur-md">
                         {item.eyebrow || item.category}
